@@ -1,0 +1,223 @@
+inherit_from: .rubocop_todo.yml
+
+## rubocop 関連の gem を require します。
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+
+## 全体に適応する項目を定義します。ここで Exclude に設定したファイルは、チェック対象外になります。
+AllCops:
+  TargetRubyVersion: 2.7.4
+  TargetRailsVersion: 6.1.4
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'tmp/**/*'
+    - 'node_modules/**/*'
+
+Rails:
+  Enabled: true
+
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+
+## `and return` の形式を利用できるようにします。基本的には、&& と || を使います。
+Style/AndOr:
+  Enabled: false
+  # EnforcedStyle: conditionals
+
+## 日本語コメントを許可します。
+Style/AsciiComments:
+  Enabled: false
+
+## ハッシュのシンボル表記を許可
+Style/HashSyntax:
+  Enabled: false
+
+########## Layout ##########
+
+# 一行長
+Layout/LineLength:
+  Max: 160
+  Exclude:
+    - 'db/migrate/*.rb'
+    - 'db/fixtures/*.rb'
+    - 'db/seeds.rb'
+
+# 配列の改行
+Layout/FirstArrayElementIndentation:
+  Description: Checks the indentation of the first element in an array literal.
+  Enabled: true
+  EnforcedStyle: consistent
+
+# プロジェクト始動時に書かれた記法を踏襲するため
+Layout/DotPosition:
+  Enabled: false
+
+# 桁揃えが綺麗にならないことが多い
+Layout/ExtraSpacing:
+  Enabled: false
+
+# 桁揃えが綺麗にならないことが多い
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+# 桁揃えで引っかかるので全体的にチェックしない
+Layout/SpaceBeforeFirstArg:
+  Enabled: false
+
+
+# 最下行にブランク行が欲しい
+Layout/TrailingEmptyLines:
+  Enabled: false
+
+# `||` も align に使うことがあるので追加する
+Layout/SpaceAroundOperators:
+  AllowForAlignment: true
+  # MultiSpaceAllowedForOperators:
+  #   - '='
+  #   - '=>'
+  #   - '||'
+
+########## Metrics ##########
+
+Metrics/AbcSize:
+  Max: 40
+
+# メソッドの最大行数（コメントを含まない）
+Metrics/MethodLength:
+  CountComments: false
+  Max: 30
+
+Metrics/ClassLength:
+  CountComments: false
+  Max: 180
+
+Metrics/CyclomaticComplexity:
+  Max: 11
+
+########## Rails ##########
+
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+
+########## RSpec ##########
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+
+RSpec/ExampleLength:
+  Max: 8
+
+########## Lint ##########
+Lint/NonLocalExitFromIterator:
+  Enabled: false
+
+########## Naming ##########
+
+########## Others ##########
+
+# gemのスペルの並び順
+Bundler/OrderedGems:
+  Exclude:
+    - Gemfile
+
+########## New Cops #########
+
+Lint/DuplicateRegexpCharacterClassElement: # (new in 1.1)
+  Enabled: true
+Lint/EmptyBlock: # (new in 1.1)
+  Enabled: false
+Lint/NoReturnInBeginEndBlocks: # (new in 1.2)
+  Enabled: true
+Lint/ToEnumArguments: # (new in 1.1)
+  Enabled: true
+Lint/UnmodifiedReduceAccumulator: # (new in 1.1)
+  Enabled: true
+Style/ArgumentsForwarding: # (new in 1.1)
+  Enabled: true
+Style/CollectionCompact: # (new in 1.2)
+  Enabled: true
+Style/DocumentDynamicEvalDefinition: # (new in 1.1)
+  Enabled: true
+Style/NegatedIfElseCondition: # (new in 1.2)
+  Enabled: true
+Style/SwapValues: # (new in 1.1)
+  Enabled: true
+Style/SymbolArray:
+  Enabled: false
+Rails/ActiveRecordCallbacksOrder: # (new in 2.7)
+  Enabled: true
+Rails/AfterCommitOverride: # (new in 2.8)
+  Enabled: true
+Rails/FindById: # (new in 2.7)
+  Enabled: true
+Rails/Inquiry: # (new in 2.7)
+  Enabled: true
+Rails/MailerName: # (new in 2.7)
+  Enabled: true
+Rails/MatchRoute: # (new in 2.7)
+  Enabled: true
+Rails/NegateInclude: # (new in 2.7)
+  Enabled: true
+Rails/Pluck: # (new in 2.7)
+  Enabled: true
+Rails/PluckInWhere: # (new in 2.7)
+  Enabled: true
+Rails/RenderInline: # (new in 2.7)
+  Enabled: true
+Rails/RenderPlainText: # (new in 2.7)
+  Enabled: true
+Rails/ShortI18n: # (new in 2.7)
+  Enabled: true
+Rails/SquishedSQLHeredocs: # (new in 2.8)
+  Enabled: true
+Rails/WhereExists: # (new in 2.7)
+  Enabled: true
+Rails/WhereNot: # (new in 2.8)
+  Enabled: true
+Performance/AncestorsInclude: # (new in 1.7)
+  Enabled: true
+Performance/BigDecimalWithNumericArgument: # (new in 1.7)
+  Enabled: true
+Performance/RedundantSortBlock: # (new in 1.7)
+  Enabled: true
+Performance/RedundantStringChars: # (new in 1.7)
+  Enabled: true
+Performance/ReverseFirst: # (new in 1.7)
+  Enabled: true
+Performance/SortReverse: # (new in 1.7)
+  Enabled: true
+Performance/Squeeze: # (new in 1.7)
+  Enabled: true
+Performance/StringInclude: # (new in 1.7)
+  Enabled: true
+Performance/Sum: # (new in 1.8)
+  Enabled: true
+Lint/DuplicateBranch: # (new in 1.3)
+  Enabled: true
+Lint/EmptyClass: # (new in 1.3)
+  Enabled: true
+Style/NilLambda: # (new in 1.3)
+  Enabled: true
+Style/RedundantArgument: # (new in 1.4)
+  Enabled: true
+Performance/BlockGivenWithExplicitBlock: # (new in 1.9)
+  Enabled: true
+Performance/CollectionLiteralInLoop: # (new in 1.8)
+  Enabled: true
+Performance/ConstantRegexp: # (new in 1.9)
+  Enabled: true
+Performance/MethodObjectAsBlock: # (new in 1.9)
+  Enabled: true
